@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from "react"
 import Image from "next/image"
 import { CheckCircle } from "lucide-react"
 import Button from "@/components/ui/button"
@@ -8,11 +9,22 @@ import Button from "@/components/ui/button"
 const PRODUCT_NAME = "Aegis Veil"
 const PRODUCT_TAGLINE = "Your Invisible Canvas, Perfected by Science."
 
+// Product images array
+const productImages = [
+  { src: "/images/heroimg.png", alt: "Aegis Veil Main" },
+  { src: "/images/prob1.png", alt: "Aegis Veil View 1" },
+  { src: "/images/prob2.png", alt: "Aegis Veil View 2" },
+  { src: "/images/prob3.png", alt: "Aegis Veil View 3" },
+  { src: "/images/prob4.png", alt: "Aegis Veil View 4" },
+]
+
 export default function ProductPage({
   setCurrentPage,
 }: {
   setCurrentPage: (page: string) => void
 }) {
+  const [selectedImage, setSelectedImage] = useState(0)
+
   const benefits = [
     "Forms an invisible, breathable barrier.",
     "Protects skin from cosmetic ingredients and pollutants.",
@@ -41,24 +53,40 @@ export default function ProductPage({
         {/* Product Hero */}
         <section className="flex flex-col lg:flex-row items-center gap-8 md:gap-12 mb-16 md:mb-24">
           <div className="lg:w-1/2">
-            <Image
-              src="/images/heroimg.png?height=600&width=700"
-              alt={PRODUCT_NAME}
-              className="w-full rounded-xl shadow-2xl object-cover"
-              width={700}
-              height={600}
-            />
-            {/* Thumbnail images */}
-            <div className="mt-4 grid grid-cols-4 gap-2">
-              {[1, 2, 3, 4].map((i) => (
-                <Image
-                  key={i}
-                  src={`/images/prob${i}.png?height=120&width=150`}
-                  alt={`Aegis Veil View ${i}`}
-                  className="rounded-md cursor-pointer hover:opacity-80 transition-opacity"
-                  width={150}
-                  height={120}
-                />
+            {/* Main Image */}
+            <div className="relative aspect-square mb-4">
+              <Image
+                src={productImages[selectedImage].src}
+                alt={productImages[selectedImage].alt}
+                className="rounded-xl shadow-2xl object-cover"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                quality={85}
+                priority={true}
+                placeholder="blur"
+                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRoaHSQtJSEkMj4xLy4vLi4+QT5APj49QT48LzFBPkVFRUVBRUFBRUVFRUVFRUX/2wBDAR0XFyAeIB4gHh4gIB4lICAgICUmJSUlJSUxJSUlJSUlJSUlJSUlJSUlJSUlJSUlJSUlJSUlJSUlJSUlJSUlJSX/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
+              />
+            </div>
+            {/* Thumbnails */}
+            <div className="grid grid-cols-5 gap-2">
+              {productImages.map((image, index) => (
+                <button
+                  key={index}
+                  onClick={() => setSelectedImage(index)}
+                  className={`relative aspect-square rounded-md overflow-hidden ${
+                    selectedImage === index ? "ring-2 ring-teal-500" : "ring-1 ring-gray-200"
+                  }`}
+                >
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    sizes="(max-width: 768px) 20vw, 10vw"
+                    className="object-cover hover:opacity-80 transition-opacity"
+                    quality={60}
+                    loading="lazy"
+                  />
+                </button>
               ))}
             </div>
           </div>
@@ -72,7 +100,6 @@ export default function ProductPage({
             </p>
             <div className="mb-6">
               <span className="text-3xl font-bold text-gray-800">$75.00</span>
-              {/* Add to cart, quantity selector etc. */}
             </div>
             <Button primary className="w-full sm:w-auto text-lg px-10 py-4">
               Add to Bag
