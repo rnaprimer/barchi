@@ -7,7 +7,7 @@ import Button from "@/components/ui/button"
 // Global Constants
 const BRAND_NAME = "Barchi"
 const TAGLINE = "Invisible Science. Visible Radiance."
-const PRODUCT_NAME = "Aegis Veil" // Aegis means shield, Veil implies invisibility
+const PRODUCT_NAME = "Aegis Veil"
 const PRODUCT_TAGLINE = "Your Invisible Canvas, Perfected by Science."
 
 export default function HomePage({
@@ -20,7 +20,6 @@ export default function HomePage({
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-gray-50 to-slate-100 py-20 md:py-32 min-h-[calc(100vh-80px)] flex items-center">
         <div className="absolute inset-0 opacity-10">
-          {/* Subtle background pattern or abstract scientific imagery */}
         </div>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-800 mb-6 leading-tight">
@@ -77,11 +76,15 @@ export default function HomePage({
           <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
             <div className="md:w-1/2">
               <Image
-                src="/images/productb1.png?height=500&width=600"
+                src="/images/productb1.png"
                 alt={PRODUCT_NAME}
                 className="rounded-lg shadow-2xl w-full"
                 width={600}
                 height={500}
+                quality={85}
+                priority={true}
+                placeholder="blur"
+                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRoaHSQtJSEkMj4xLy4vLi4+QT5APj49QT48LzFBPkVFRUVBRUFBRUVFRUVFRUX/2wBDAR0XFyAeIB4gHh4gIB4lICAgICUmJSUlJSUxJSUlJSUlJSUlJSUlJSUlJSUlJSUlJSUlJSUlJSUlJSUlJSUlJSX/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
               />
             </div>
             <div className="md:w-1/2">
